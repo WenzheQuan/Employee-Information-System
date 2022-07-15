@@ -1,0 +1,66 @@
+{% extends "layout1.html" %}}
+{% block content %}
+
+<div class="container">
+
+    <div style="margin-bottom: 10px">
+        <a class="btn btn-success" href="#">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+            Add SpBum
+        </a>
+
+        <a class="btn btn-success" href="#">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+            Add SpBum(ModelForm)
+        </a>
+
+    </div>
+
+    <div>
+        <div class="bs-example" data-example-id="table-within-panel">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    Number List
+                </div>
+                <div class="panel-body">
+
+                </div>
+
+                <!-- Table -->
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Mobile</th>
+                        <th>Price</th>
+                        <th>Level</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for obj in queryset %}
+                    <tr>
+                        <td>{{obj.id}}</td>
+                        <td>{{obj.mobile}}</td>
+                        <td>{{obj.price}}</td>
+                        <td>{{obj.get_level_display}}</td>
+                        <td>{{obj.get_status_display}}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="#">Edit</a>
+                            <a class="btn btn-danger btn-xs" href="#">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock%}
