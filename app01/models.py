@@ -29,9 +29,11 @@ class UserInfo(models.Model):
                       )
     gender = models.SmallIntegerField(verbose_name="Gender", choices=gender_choices)
 
-
+from django.core.validators import RegexValidator
 class SuperNum(models.Model):
-    mobile = models.CharField(verbose_name="Mobile", max_length=32)
+    mobile = models.CharField(verbose_name="Mobile", max_length=32,
+                              # Validate if the entered query is decimal number.
+                              validators=[RegexValidator(r'\d$',"Format Wrong")])
     price = models.IntegerField(verbose_name="Price")
     level_choices =(
         (1,'Low'),

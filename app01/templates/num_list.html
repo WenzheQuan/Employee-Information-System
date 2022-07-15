@@ -4,14 +4,9 @@
 <div class="container">
 
     <div style="margin-bottom: 10px">
-        <a class="btn btn-success" href="#">
+        <a class="btn btn-success" href="/num/add/">
             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            Add SpBum
-        </a>
-
-        <a class="btn btn-success" href="#">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            Add SpBum(ModelForm)
+            Add Super Number
         </a>
 
     </div>
@@ -49,8 +44,8 @@
                         <td>{{obj.get_level_display}}</td>
                         <td>{{obj.get_status_display}}</td>
                         <td>
-                            <a class="btn btn-primary btn-xs" href="#">Edit</a>
-                            <a class="btn btn-danger btn-xs" href="#">Delete</a>
+                            <a class="btn btn-primary btn-xs" href="/num/{{obj.id}}/edit/">Edit</a>
+                            <a class="btn btn-danger btn-xs" href="/num/{{obj.id}}/delete/">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

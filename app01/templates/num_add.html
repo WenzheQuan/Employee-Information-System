@@ -1,14 +1,15 @@
-{% extends "layout1.html"%}
+{% extends "layout1.html" %}
 {% block content %}
+
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>Add New User</h3>
+            <h3>Add New SpNum</h3>
         </div>
         <div class="panel-body">
             <form method="POST" novalidate>
                 {% csrf_token %}
-                {% for field in userform %}
+                {% for field in numform %}
                 <div class="form-group">
                     <label>{{ field.label }}</label>
                     {{ field }}
@@ -21,4 +22,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
