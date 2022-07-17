@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from app01 import models
-
+from app01.utils.pagination import Pagination
 
 # Create your views here.
 def depart_list(request):
@@ -40,8 +40,14 @@ def user_list(request):
     queryset = models.UserInfo.objects.all()
     # for obj in queryset:
     #     print(obj.id,obj.name,obj.start_time.strftime("%Y-%M-%D"),obj.get_gender_display(),obj.depart.title)
+    page_obj = Pagination(request,queryset,page_size=2)
+    page_context={
+        "queryset":page_obj.page_queryset,
+        "page_string":page_obj.html(),
 
-    return render(request, "user_list.html", {"queryset": queryset})
+    }
+
+    return render(request, "user_list.html", page_context)
 
 
 def user_add(request):
@@ -125,10 +131,24 @@ class nummodel(forms.ModelForm):
 def num_list(request):
     """Sort by level in reverse order"""
     queryset = models.SuperNum.objects.all().order_by("-level")
-    # for obj in queryset:
-    #     print(obj.id,obj.name,obj.start_time.strftime("%Y-%M-%D"),obj.get_gender_display(),obj.depart.title)
+    # value = {}
+    # search_data = request.GET.get("sd","")
+    # if search_data:
+    #     value["mobile__contains"]=search_data
+    #
+    # queryset = models.SuperNum.objects.filter(**value).order_by("-level")
+    #
+    #
+    # # for obj in queryset:
+    # #     print(obj.id,obj.name,obj.start_time.strftime("%Y-%M-%D"),obj.get_gender_display(),obj.depart.title)
+    page_obj = Pagination(request, queryset, page_size=2)
+    page_context = {
+        "queryset": page_obj.page_queryset,
+        "page_string": page_obj.html(),
 
-    return render(request, "num_list.html", {"queryset": queryset})
+    }
+
+    return render(request, "num_list.html", page_context)
 
 
 def num_add(request):
@@ -180,3 +200,4 @@ def num_edit(request,nid):
 def num_delete(request,nid):
     models.SuperNum.objects.filter(id=nid).delete()
     return redirect("/num/list/")
+
